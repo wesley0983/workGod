@@ -9,16 +9,20 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="sample.Controller">
     <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
     </padding>
 
 
@@ -33,15 +37,36 @@
                                     <children>
                                         <HBox spacing="10.0">
                                             <children>
-                                                <Label style="-fx-font: NORMAL 20 Tahoma;" text="新增廠商" />
-                                                <TextField />
-                                                <Button fx:id="btn" mnemonicParsing="false" onAction="#click" text="add" />
+                                                <Label text="新增廠商">
+                                                    <font>
+                                                        <Font size="15.0"/>
+                                                    </font>
+                                                </Label>
+                                                <TextField/>
+                                                <Button fx:id="btn" mnemonicParsing="false" onAction="#click"
+                                                        text="add"/>
+                                            </children>
+                                        </HBox>
+                                        <HBox prefHeight="274.0" prefWidth="473.0">
+                                            <children>
+                                                <TreeTableView prefHeight="274.0" prefWidth="463.0">
+                                                    <columns>
+                                                        <TreeTableColumn prefWidth="231.0" text="C1"/>
+                                                        <TreeTableColumn minWidth="0.0" prefWidth="176.0" text="C2"/>
+                                                    </columns>
+                                                </TreeTableView>
                                             </children>
                                         </HBox>
                                         <HBox spacing="10.0">
                                             <children>
-                                                <ComboBox prefWidth="150.0" promptText="廠商選單" />
-                                                <Button mnemonicParsing="false" text="Button" />
+                                                <Label text="新增尺寸">
+                                                    <font>
+                                                        <Font size="15.0"/>
+                                                    </font>
+                                                </Label>
+                                                <ComboBox prefWidth="150.0" promptText="廠商選單"/>
+                                                <TextField/>
+                                                <Button mnemonicParsing="false" text="addSize"/>
                                             </children>
                                         </HBox>
                                     </children>
@@ -58,19 +83,19 @@
                                     <children>
                                         <HBox prefHeight="100.0" prefWidth="200.0">
                                             <children>
-                                                <TextField />
-                                                <Button mnemonicParsing="false" text="Button" />
+                                                <TextField/>
+                                                <Button mnemonicParsing="false" text="Button"/>
                                             </children>
                                         </HBox>
                                         <HBox prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <MenuButton mnemonicParsing="false" text="MenuButton">
-                                      <items>
-                                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                                        <MenuItem mnemonicParsing="false" text="Action 2" />
-                                      </items>
-                                    </MenuButton>
-                                 </children>
+                                            <children>
+                                                <MenuButton mnemonicParsing="false" text="MenuButton">
+                                                    <items>
+                                                        <MenuItem mnemonicParsing="false" text="Action 1"/>
+                                                        <MenuItem mnemonicParsing="false" text="Action 2"/>
+                                                    </items>
+                                                </MenuButton>
+                                            </children>
                                         </HBox>
                                     </children>
                                 </VBox>
@@ -83,13 +108,13 @@
     </children>
 
     <columnConstraints>
-        <ColumnConstraints />
+        <ColumnConstraints/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0"/>
     </rowConstraints>
 </GridPane>
