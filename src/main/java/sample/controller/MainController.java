@@ -3,8 +3,10 @@ package sample.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import sample.jfxsupport.FXMLController;
 
-public class Controller {
+@FXMLController
+public class MainController {
 
 
     @FXML
