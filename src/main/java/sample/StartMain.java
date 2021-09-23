@@ -6,15 +6,19 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import org.h2.tools.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 import sample.controller.view.MainView;
 import sample.jfxsupport.AbstractFxmlView;
 import sample.jfxsupport.GUIState;
+
+import java.sql.SQLException;
 
 @SpringBootApplication
 public class StartMain extends javafx.application.Application {
@@ -25,6 +29,19 @@ public class StartMain extends javafx.application.Application {
     public static void main(String[] args) {
         System.out.println("111111111111111111111111111");
         launch(args);
+    }
+
+    /**
+     * 手動注入tcp與web的控制器方法1
+     */
+    @Bean(initMethod = "start", destroyMethod = "stop")
+    public Server h2ServerTcp() throws SQLException {
+        return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9092");
+    }
+
+    @Bean(initMethod = "start", destroyMethod = "stop")
+    public Server h2ServerWeb() throws SQLException {
+        return Server.createWebServer("-web", "-tcpAllowOthers", "-webPort", "8082");
     }
 
     @Override
