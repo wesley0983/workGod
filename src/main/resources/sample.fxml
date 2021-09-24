@@ -49,8 +49,8 @@
                                             <children>
                                                 <TreeTableView prefHeight="274.0" prefWidth="463.0">
                                                     <columns>
-                                                        <TreeTableColumn prefWidth="231.0" text="C1" />
-                                                        <TreeTableColumn minWidth="0.0" prefWidth="176.0" text="C2" />
+                                                        <TreeTableColumn prefWidth="231.0" text="廠商" />
+                                                        <TreeTableColumn minWidth="0.0" prefWidth="176.0" text="" />
                                                     </columns>
                                                 </TreeTableView>
                                             </children>

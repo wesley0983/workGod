@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import org.h2.tools.Server;
 import org.slf4j.Logger;
@@ -23,7 +22,7 @@ import java.sql.SQLException;
 @SpringBootApplication
 public class StartMain extends javafx.application.Application {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(StartMain.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StartMain.class);
     private static ConfigurableApplicationContext applicationContext;
 
     public static void main(String[] args) {
@@ -41,7 +40,7 @@ public class StartMain extends javafx.application.Application {
 
     @Bean(initMethod = "start", destroyMethod = "stop")
     public Server h2ServerWeb() throws SQLException {
-        return Server.createWebServer("-web", "-tcpAllowOthers", "-webPort", "8082");
+        return Server.createWebServer("-web", "-tcpAllowOthers", "-webPort", "8080");
     }
 
     @Override
