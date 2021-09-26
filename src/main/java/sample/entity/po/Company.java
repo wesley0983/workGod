@@ -1,9 +1,10 @@
-package sample.entity;
+package sample.entity.po;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-public class Company extends SimpleEntity{
+public class Company extends SimpleEntity {
 
     private static final long serialVersionUID = 3322779769469363315L;
 

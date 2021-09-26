@@ -1,4 +1,4 @@
-package sample.entity;
+package sample.entity.po;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +14,14 @@ public abstract class SimpleEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)//主鍵由資料庫自動生成
     private int id;
+
+    protected SimpleEntity() {
+        super();
+    }
+
+    public SimpleEntity(int id) {
+        this.id = id;
+    }
 
     public int getId() {
         return id;

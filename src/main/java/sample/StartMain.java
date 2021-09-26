@@ -26,7 +26,6 @@ public class StartMain extends javafx.application.Application {
     private static ConfigurableApplicationContext applicationContext;
 
     public static void main(String[] args) {
-        System.out.println("111111111111111111111111111");
         launch(args);
     }
 
@@ -68,6 +67,15 @@ public class StartMain extends javafx.application.Application {
 //            GUIState.getStage().initStyle(StageStyle.DECORATED);
 //        }
         showView(MainView.class);
+        System.out.println("---------------------");
+//        displayAllBeans();
+    }
+
+    public static void displayAllBeans() {
+        String[] allBeanNames = applicationContext.getBeanDefinitionNames();
+        for(String beanName : allBeanNames) {
+            System.out.println(beanName);
+        }
     }
 
     public static void showView(final Class<? extends AbstractFxmlView> newView) {
