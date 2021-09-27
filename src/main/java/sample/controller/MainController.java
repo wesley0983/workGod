@@ -50,13 +50,12 @@ public class MainController {
     @FXML
     private void initialize() {
         ObservableList<Report> data = FXCollections.observableArrayList(companyService.init());
-//        companyName.setCellValueFactory(new PropertyValueFactory<Report,String>("companyName"));
-//        productName.setCellValueFactory(new PropertyValueFactory<Report,String>("productName"));
+        companyName.setCellValueFactory(new PropertyValueFactory<Report,String>("companyName"));
+        productName.setCellValueFactory(new PropertyValueFactory<Report,String>("productName"));
 
         reportView.setEditable(true);
         reportView.setItems(data);
 
-//        tableView.setItems((ObservableList<Report>) init);
     }
 
     @FXML

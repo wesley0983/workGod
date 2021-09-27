@@ -26,20 +26,16 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<Report> init() {
-        System.out.println("++++++++++++++");
-
         Iterable<Company> all = companyRepository.findAll();
         List<Report> reportList = new ArrayList<>();
 
         Iterator<Company> it = all.iterator();
         while (it.hasNext()) {
             Company company = it.next();
-//            List<Product> productList = productRepository.findByCompany_id(company.getId());
-//            Report report = new Report(company, product);
-            Report report = new Report();
-            report.setCompanyName(company.getName());
-            report.setProductName("bbb");
-            reportList.add(report);
+            List<Product> productList = productRepository.findByCompanyid(company.getId());
+            productList.forEach(item ->{
+                reportList.add(new Report(company,item));
+            });
         }
         return reportList;
     }
