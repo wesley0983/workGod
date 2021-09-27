@@ -12,7 +12,7 @@ public class CustomerGridDef  {
 	public static String COLUMN_NAMES[] =
 		{ "company", "product"};
 	public static String COLUMN_DATA_NAMES[] =
-		{ "company", "product"};
+		{ "companyName", "productName"};
 	public static Integer COLUMN_SIZES[] = { 40, 60};
 	public static String TITLE_POPUPS = "Customer";
 

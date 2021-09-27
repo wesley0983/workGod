@@ -34,9 +34,11 @@ public class CompanyServiceImpl implements CompanyService {
         Iterator<Company> it = all.iterator();
         while (it.hasNext()) {
             Company company = it.next();
-            Optional<Product> optProduct = productRepository.findById(company.getId());
-            Product product = optProduct.get();
-            Report report = new Report(company, product);
+//            List<Product> productList = productRepository.findByCompany_id(company.getId());
+//            Report report = new Report(company, product);
+            Report report = new Report();
+            report.setCompanyName(company.getName());
+            report.setProductName("bbb");
             reportList.add(report);
         }
         return reportList;

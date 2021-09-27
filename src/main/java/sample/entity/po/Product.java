@@ -16,6 +16,9 @@ public class Product extends SimpleEntity {
     @Column(nullable = false)
     private Integer amount;
 
+    @Column(nullable = false)
+    private Integer company_id;
+
     public String getName() {
         return name;
     }
@@ -30,5 +33,13 @@ public class Product extends SimpleEntity {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    public Integer getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(Integer company_id) {
+        this.company_id = company_id;
     }
 }
