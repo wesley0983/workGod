@@ -11,5 +11,5 @@ public interface CompanyService {
 
     List<Owner> findCompanyAll();
 
-    Report add(String companyText);
+    Report addCompany(String companyText);
 }

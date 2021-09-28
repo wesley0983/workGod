@@ -1,6 +1,8 @@
 package sample.service;
 
+import sample.entity.po.Product;
+
 public interface ProductService {
 
-    void add(String productText);
+    Product addProduct(String productText, String comboboxValue);
 }

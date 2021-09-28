@@ -1,16 +1,20 @@
 package sample.entity.response;
 
+import sample.entity.po.Company;
+
 public class Owner {
 
-    private int id;
     private String name;
 
-    public int getId() {
-        return id;
+    public Owner() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Owner(Company company) {
+        this.name = company.getName();
+    }
+
+    public Owner(Report report) {
+        this.name = report.getCompanyName();
     }
 
     public String getName() {

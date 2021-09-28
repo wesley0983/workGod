@@ -56,13 +56,16 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public List<Owner> findCompanyAll() {
         List<Company> companyList = companyRepository.findAll();
+        List<Owner> ownerList = new ArrayList<>();
+        for (Company company: companyList){
+            ownerList.add(new Owner(company));
+        }
 
-
-        return null;
+        return ownerList;
     }
 
     @Override
-    public Report add(String companyText) {
+    public Report addCompany(String companyText) {
         Company company = companyRepository.findByName(companyText);
         if (!Objects.isNull(company)){
             throw new RuntimeException("重複廠商");

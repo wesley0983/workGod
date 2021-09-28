@@ -12,13 +12,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import sample.entity.po.Company;
+import sample.entity.po.Product;
 import sample.entity.response.Owner;
 import sample.entity.response.Report;
 import sample.jfxsupport.FXMLController;
 import sample.service.CompanyService;
 import sample.service.ProductService;
-
-import java.util.Collections;
 import java.util.List;
 
 @FXMLController
@@ -70,9 +69,10 @@ public class MainController {
         reportView.setEditable(true);
         reportView.setItems(reportData);
 
-
-//        companyData.add(owner);
+        List<Owner> companyList = companyService.findCompanyAll();
+        companyData.addAll(companyList);
         menuCompany.setItems(companyData);
+        menuCompany.setEditable(true);
 
     }
 
@@ -81,8 +81,9 @@ public class MainController {
         String companyText = textCompany.getText();
         if (StringUtils.isNotEmpty(companyText)){
             logger.debug(textCompany.getText());
-            Report report = companyService.add(companyText);
+            Report report = companyService.addCompany(companyText);
             reportData.add(report);
+            companyData.add(new Owner(report));
             textCompany.clear();
         }
     }
@@ -91,9 +92,12 @@ public class MainController {
     void addProduct(ActionEvent event) {
         System.out.println("test2~~");
         String productText = textProduct.getText();
+        String comboboxValue = String.valueOf(menuCompany.getValue());
 
-        if (StringUtils.isNotEmpty(productText)){
-            productService.add(productText);
+
+        if (StringUtils.isNotEmpty(productText) && StringUtils.isNotEmpty(comboboxValue)){
+            Product product = productService.addProduct(productText, comboboxValue);
+
         }
     }
 }
