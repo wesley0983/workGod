@@ -1,14 +1,21 @@
 package sample.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
+import sample.controller.MainController;
 import sample.entity.po.Company;
 import sample.entity.po.Product;
+import sample.entity.response.Owner;
 import sample.entity.response.Report;
 import sample.repository.CompanyRepository;
 import sample.repository.ProductRepository;
 import sample.service.CompanyService;
+import java.util.Objects;
+
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,6 +24,8 @@ import java.util.Optional;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
+
+    private static final Logger logger = LoggerFactory.getLogger(CompanyServiceImpl.class);
 
     @Autowired
     CompanyRepository companyRepository;
@@ -29,21 +38,39 @@ public class CompanyServiceImpl implements CompanyService {
         Iterable<Company> all = companyRepository.findAll();
         List<Report> reportList = new ArrayList<>();
 
-        Iterator<Company> it = all.iterator();
-        while (it.hasNext()) {
-            Company company = it.next();
-            List<Product> productList = productRepository.findByCompanyid(company.getId());
-            productList.forEach(item ->{
-                reportList.add(new Report(company,item));
-            });
+        all.forEach(item -> {
+           reportList.add(new Report(item));
+        });
+
+        logger.debug("init, companyData size: {}",reportList.size());
+        for(Report report :reportList){
+            List<Product> productList = productRepository.findByCompany_Id(report.getCompany_id());
+            for(Product product: productList){
+                report.setProductName(product.getName());
+            }
         }
+
         return reportList;
     }
 
     @Override
-    public void add(String companyText) {
-        Company company = new Company();
-        company.setName(companyText);
-        companyRepository.save(company);
+    public List<Owner> findCompanyAll() {
+        List<Company> companyList = companyRepository.findAll();
+
+
+        return null;
+    }
+
+    @Override
+    public Report add(String companyText) {
+        Company company = companyRepository.findByName(companyText);
+        if (!Objects.isNull(company)){
+            throw new RuntimeException("重複廠商");
+        }
+        Company addCompany = new Company();
+        addCompany.setName(companyText);
+        logger.debug("add, create company- Name: {}",addCompany.getName());
+        Company save = companyRepository.save(addCompany);
+        return new Report(save);
     }
 }

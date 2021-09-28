@@ -1,5 +1,6 @@
 package sample.service;
 
+import sample.entity.response.Owner;
 import sample.entity.response.Report;
 
 import java.util.List;
@@ -8,5 +9,7 @@ public interface CompanyService {
 
     List<Report> init();
 
-    void add(String companyText);
+    List<Owner> findCompanyAll();
+
+    Report add(String companyText);
 }

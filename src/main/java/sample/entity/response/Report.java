@@ -7,8 +7,13 @@ public class Report {//extends SimpleEntity {
 
     private String companyName;
     private String productName;
+    private Integer company_id;
 
     public Report() {
+    }
+
+    public Report(Company company) {
+        this.companyName = company.getName();
     }
 
     public Report(Company company, Product product){
@@ -30,6 +35,14 @@ public class Report {//extends SimpleEntity {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public Integer getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(Integer company_id) {
+        this.company_id = company_id;
     }
 }
 

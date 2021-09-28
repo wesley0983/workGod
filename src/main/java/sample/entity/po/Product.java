@@ -4,6 +4,8 @@ import sample.entity.SimpleEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Product extends SimpleEntity {
@@ -15,9 +17,11 @@ public class Product extends SimpleEntity {
 
     @Column(nullable = false)
     private Integer amount;
-`
-    @Column
-    private Integer companyid;
+
+    @ManyToOne
+    @JoinColumn(name="company_id")
+    private Company company;
+
 
     public String getName() {
         return name;
@@ -35,11 +39,11 @@ public class Product extends SimpleEntity {
         this.amount = amount;
     }
 
-    public Integer getCompanyid() {
-        return companyid;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setCompanyid(Integer companyid) {
-        this.companyid = companyid;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }
