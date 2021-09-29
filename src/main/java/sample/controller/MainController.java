@@ -3,9 +3,11 @@ package sample.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +67,29 @@ public class MainController {
     private void initialize() {
         logger.debug("initialize table star...");
         companyName.setCellValueFactory(new PropertyValueFactory<Report,String>("companyName"));
+        companyName.setCellFactory(TextFieldTableCell.forTableColumn());
+        companyName.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Report, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Report, String> t) {
+                        String companyOldName = t.getTableView().getItems().get(t.getTablePosition().getRow()).getCompanyName();
+                        companyService.editCompany(companyOldName,t.getNewValue());
+                    }
+                }
+        );
+
         productName.setCellValueFactory(new PropertyValueFactory<Report,String>("productName"));
+        productName.setCellFactory(TextFieldTableCell.forTableColumn());
+        productName.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Report, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Report, String> t) {
+                        String productOld = t.getTableView().getItems().get(t.getTablePosition().getRow()).getProductName();
+                        String companyOldName = t.getTableView().getItems().get(t.getTablePosition().getRow()).getCompanyName();
+                        productService.editProduct(companyOldName,productOld,t.getNewValue());
+                    }
+                }
+        );
 
         //表格
         List<Report> reportList = companyService.init();
@@ -119,7 +143,7 @@ public class MainController {
     }
 
     @FXML
-    void updateTable(TableColumn.CellEditEvent<?,String> value) {
-        System.out.println(value);
+    void updateTable(ActionEvent event) {
+        System.out.println(menuCompany.getValue());
     }
 }

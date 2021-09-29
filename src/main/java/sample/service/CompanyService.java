@@ -1,5 +1,6 @@
 package sample.service;
 
+import sample.entity.po.Company;
 import sample.entity.response.Owner;
 import sample.entity.response.Report;
 
@@ -12,4 +13,6 @@ public interface CompanyService {
     List<Owner> findCompanyAll();
 
     Report addCompany(String companyText);
+
+    void editCompany(String companyOldName,String companyNewName);
 }

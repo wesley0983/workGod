@@ -8,8 +8,7 @@ import sample.repository.CompanyRepository;
 import sample.repository.ProductRepository;
 import sample.service.ProductService;
 
-import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
+import java.util.Objects;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -28,5 +27,15 @@ public class ProductServiceImpl implements ProductService {
         product.setName(productText);
         product.setCompany(company);
         return productRepository.save(product);
+    }
+
+    @Override
+    public void editProduct(String companyOldName,String productOld, String productNewName) {
+        Company company = companyRepository.findByName(companyOldName);
+        Product product = productRepository.findByNameAndCompany(productOld,company);
+        if (!Objects.isNull(product)){
+            product.setName(productNewName);
+            productRepository.save(product);
+        }
     }
 }

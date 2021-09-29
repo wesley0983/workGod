@@ -74,4 +74,14 @@ public class CompanyServiceImpl implements CompanyService {
         Company save = companyRepository.save(addCompany);
         return new Report(save);
     }
+
+
+    @Override
+    public void editCompany(String companyOldName, String companyNewName) {
+        Company company = companyRepository.findByName(companyOldName);
+        if (!Objects.isNull(company)){
+            company.setName(companyNewName);
+            companyRepository.save(company);
+        }
+    }
 }
