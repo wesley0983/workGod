@@ -9,6 +9,7 @@ import sample.repository.ProductRepository;
 import sample.service.ProductService;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -26,11 +27,6 @@ public class ProductServiceImpl implements ProductService {
         Product product = new Product();
         product.setName(productText);
         product.setCompany(company);
-        EntityManager em = null;
-        Company car = em.getReference(Company.class, company.getId());
-
-        product.setCompany(car);
-        em.persist(product);
         return productRepository.save(product);
     }
 }

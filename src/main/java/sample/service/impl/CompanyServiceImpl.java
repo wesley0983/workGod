@@ -35,18 +35,16 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<Report> init() {
-        Iterable<Company> all = companyRepository.findAll();
+        List<Company> companyList = companyRepository.findAll();
         List<Report> reportList = new ArrayList<>();
 
-        all.forEach(item -> {
-           reportList.add(new Report(item));
-        });
-
-        logger.debug("init, companyData size: {}",reportList.size());
-        for(Report report :reportList){
-            List<Product> productList = productRepository.findByCompany_Id(report.getCompany_id());
-            for(Product product: productList){
-                report.setProductName(product.getName());
+        for (Company company: companyList){
+            List<Product> productList = productRepository.findByCompany_Id(company.getId());
+            if (productList.isEmpty()){
+                reportList.add(new Report(company));
+            }
+            for (Product product: productList){
+                reportList.add(new Report(company,product));
             }
         }
 

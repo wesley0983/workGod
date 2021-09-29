@@ -5,19 +5,18 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import sample.entity.po.Company;
 import sample.entity.po.Product;
 import sample.entity.response.Owner;
 import sample.entity.response.Report;
 import sample.jfxsupport.FXMLController;
 import sample.service.CompanyService;
 import sample.service.ProductService;
+
 import java.util.List;
 
 @FXMLController
@@ -58,17 +57,23 @@ public class MainController {
     ObservableList<Report> reportData = FXCollections.observableArrayList();
     ObservableList<Owner> companyData = FXCollections.observableArrayList();
 
+
+    /**
+     * 初始化
+     * */
     @FXML
     private void initialize() {
         logger.debug("initialize table star...");
         companyName.setCellValueFactory(new PropertyValueFactory<Report,String>("companyName"));
         productName.setCellValueFactory(new PropertyValueFactory<Report,String>("productName"));
+
+        //表格
         List<Report> reportList = companyService.init();
         reportData.addAll(reportList);
-
-        reportView.setEditable(true);
         reportView.setItems(reportData);
+        reportView.setEditable(true);
 
+        //下拉選單
         List<Owner> companyList = companyService.findCompanyAll();
         companyData.addAll(companyList);
         menuCompany.setItems(companyData);
@@ -76,6 +81,9 @@ public class MainController {
 
     }
 
+    /**
+     * 新增廠商
+     * */
     @FXML
     void addCompany(ActionEvent event) {
         String companyText = textCompany.getText();
@@ -88,6 +96,9 @@ public class MainController {
         }
     }
 
+    /**
+     * 新增廠商尺寸
+     * */
     @FXML
     void addProduct(ActionEvent event) {
         System.out.println("test2~~");
@@ -95,9 +106,20 @@ public class MainController {
         String comboboxValue = String.valueOf(menuCompany.getValue());
 
 
-        if (StringUtils.isNotEmpty(productText) && StringUtils.isNotEmpty(comboboxValue)){
+        if (StringUtils.isNotBlank(productText) && StringUtils.isNotEmpty(comboboxValue)){
             Product product = productService.addProduct(productText, comboboxValue);
 
+            for (Report report:reportData){
+                if (report.getCompanyName().equals(comboboxValue)){
+                    report.setProductName(product.getName());
+                }
+            }
+            reportView.refresh();
         }
+    }
+
+    @FXML
+    void updateTable(TableColumn.CellEditEvent<?,String> value) {
+        System.out.println(value);
     }
 }

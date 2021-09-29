@@ -3,7 +3,7 @@ package sample.entity.response;
 import sample.entity.po.Company;
 import sample.entity.po.Product;
 
-public class Report {//extends SimpleEntity {
+public class Report {
 
     private String companyName;
     private String productName;
@@ -14,6 +14,7 @@ public class Report {//extends SimpleEntity {
 
     public Report(Company company) {
         this.companyName = company.getName();
+        this.company_id = company.getId();
     }
 
     public Report(Company company, Product product){
