@@ -1,18 +1,17 @@
 package sample.service;
 
-import sample.entity.po.Company;
 import sample.entity.response.Owner;
-import sample.entity.response.Report;
+import sample.entity.response.VendorReport;
 
 import java.util.List;
 
 public interface CompanyService {
 
-    List<Report> init();
+    List<VendorReport> init();
 
     List<Owner> findCompanyAll();
 
-    Report addCompany(String companyText);
+    VendorReport addCompany(String companyText);
 
     void editCompany(String companyOldName,String companyNewName);
 }

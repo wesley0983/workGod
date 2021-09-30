@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
@@ -12,20 +13,33 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.MainController">
-    <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-    </padding>
+<VBox  prefHeight="600.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.MainController">
+<!--    <padding>-->
+<!--        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />-->
+<!--    </padding>-->
 
 
     <children>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About..." />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
         <TabPane tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1">
             <tabs>
                 <Tab text="廠商資訊">
@@ -47,10 +61,10 @@
                                         </HBox>
                                         <HBox prefHeight="274.0" prefWidth="473.0">
                                             <children>
-                                                <TableView fx:id="reportView" prefHeight="274.0" prefWidth="463.0">
+                                                <TableView fx:id="vendorReportView" prefHeight="274.0" prefWidth="463.0">
                                                     <columns>
                                                         <TableColumn fx:id="companyName" prefWidth="231.0" text="廠商" />
-                                                        <TableColumn fx:id="productName" minWidth="0.0" prefWidth="176.0" text="尺寸" />
+                                                        <TableColumn fx:id="productName" minWidth="0.0" prefWidth="176.0" text="樣式" />
                                                     </columns>
                                                 </TableView>
                                             </children>
@@ -62,7 +76,7 @@
                               </HBox>
                                         <HBox spacing="10.0">
                                             <children>
-                                                <Label text="新增尺寸">
+                                                <Label text="新增樣式">
                                                     <font>
                                                         <Font size="15.0" />
                                                     </font>
@@ -110,16 +124,4 @@
         </TabPane>
     </children>
 
-    <columnConstraints>
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" />
-    </rowConstraints>
-</GridPane>
+</VBox>

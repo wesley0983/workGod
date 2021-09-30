@@ -13,8 +13,8 @@ public class Owner {
         this.name = company.getName();
     }
 
-    public Owner(Report report) {
-        this.name = report.getCompanyName();
+    public Owner(VendorReport vendorReport) {
+        this.name = vendorReport.getCompanyName();
     }
 
     public String getName() {

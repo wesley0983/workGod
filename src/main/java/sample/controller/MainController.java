@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import sample.entity.po.Product;
 import sample.entity.response.Owner;
-import sample.entity.response.Report;
+import sample.entity.response.VendorReport;
 import sample.jfxsupport.FXMLController;
 import sample.service.CompanyService;
 import sample.service.ProductService;
@@ -33,13 +33,13 @@ public class MainController {
     private Button addBtnCompany;
 
     @FXML
-    private TableView<Report> reportView;
+    private TableView<VendorReport> vendorReportView;
 
     @FXML
-    private TableColumn<Report, String> companyName;
+    private TableColumn<VendorReport, String> companyName;
 
     @FXML
-    private TableColumn<Report, String> productName;
+    private TableColumn<VendorReport, String> productName;
 
     @FXML
     private ComboBox<Owner> menuCompany;
@@ -56,7 +56,7 @@ public class MainController {
     @Autowired
     private ProductService productService;
 
-    ObservableList<Report> reportData = FXCollections.observableArrayList();
+    ObservableList<VendorReport> vendorReportData = FXCollections.observableArrayList();
     ObservableList<Owner> companyData = FXCollections.observableArrayList();
 
 
@@ -66,24 +66,24 @@ public class MainController {
     @FXML
     private void initialize() {
         logger.debug("initialize table star...");
-        companyName.setCellValueFactory(new PropertyValueFactory<Report,String>("companyName"));
+        companyName.setCellValueFactory(new PropertyValueFactory<VendorReport,String>("companyName"));
         companyName.setCellFactory(TextFieldTableCell.forTableColumn());
         companyName.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<Report, String>>() {
+                new EventHandler<TableColumn.CellEditEvent<VendorReport, String>>() {
                     @Override
-                    public void handle(TableColumn.CellEditEvent<Report, String> t) {
+                    public void handle(TableColumn.CellEditEvent<VendorReport, String> t) {
                         String companyOldName = t.getTableView().getItems().get(t.getTablePosition().getRow()).getCompanyName();
                         companyService.editCompany(companyOldName,t.getNewValue());
                     }
                 }
         );
 
-        productName.setCellValueFactory(new PropertyValueFactory<Report,String>("productName"));
+        productName.setCellValueFactory(new PropertyValueFactory<VendorReport,String>("productName"));
         productName.setCellFactory(TextFieldTableCell.forTableColumn());
         productName.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<Report, String>>() {
+                new EventHandler<TableColumn.CellEditEvent<VendorReport, String>>() {
                     @Override
-                    public void handle(TableColumn.CellEditEvent<Report, String> t) {
+                    public void handle(TableColumn.CellEditEvent<VendorReport, String> t) {
                         String productOld = t.getTableView().getItems().get(t.getTablePosition().getRow()).getProductName();
                         String companyOldName = t.getTableView().getItems().get(t.getTablePosition().getRow()).getCompanyName();
                         productService.editProduct(companyOldName,productOld,t.getNewValue());
@@ -92,10 +92,10 @@ public class MainController {
         );
 
         //表格
-        List<Report> reportList = companyService.init();
-        reportData.addAll(reportList);
-        reportView.setItems(reportData);
-        reportView.setEditable(true);
+        List<VendorReport> vendorReportList = companyService.init();
+        vendorReportData.addAll(vendorReportList);
+        vendorReportView.setItems(vendorReportData);
+        vendorReportView.setEditable(true);
 
         //下拉選單
         List<Owner> companyList = companyService.findCompanyAll();
@@ -113,9 +113,9 @@ public class MainController {
         String companyText = textCompany.getText();
         if (StringUtils.isNotEmpty(companyText)){
             logger.debug(textCompany.getText());
-            Report report = companyService.addCompany(companyText);
-            reportData.add(report);
-            companyData.add(new Owner(report));
+            VendorReport vendorReport = companyService.addCompany(companyText);
+            vendorReportData.add(vendorReport);
+            companyData.add(new Owner(vendorReport));
             textCompany.clear();
         }
     }
@@ -133,12 +133,12 @@ public class MainController {
         if (StringUtils.isNotBlank(productText) && StringUtils.isNotEmpty(comboboxValue)){
             Product product = productService.addProduct(productText, comboboxValue);
 
-            for (Report report:reportData){
-                if (report.getCompanyName().equals(comboboxValue)){
-                    report.setProductName(product.getName());
+            for (VendorReport vendorReport : vendorReportData){
+                if (vendorReport.getCompanyName().equals(comboboxValue)){
+                    vendorReport.setProductName(product.getName());
                 }
             }
-            reportView.refresh();
+            vendorReportView.refresh();
         }
     }
 

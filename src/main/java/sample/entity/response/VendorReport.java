@@ -3,21 +3,21 @@ package sample.entity.response;
 import sample.entity.po.Company;
 import sample.entity.po.Product;
 
-public class Report {
+public class VendorReport {
 
     private String companyName;
     private String productName;
     private Integer company_id;
 
-    public Report() {
+    public VendorReport() {
     }
 
-    public Report(Company company) {
+    public VendorReport(Company company) {
         this.companyName = company.getName();
         this.company_id = company.getId();
     }
 
-    public Report(Company company, Product product){
+    public VendorReport(Company company, Product product){
         this.companyName = company.getName();
         this.productName = product.getName();
     }
