@@ -31,7 +31,7 @@ public class StartMain extends javafx.application.Application {
     }
 
     /**
-     * 手動注入tcp與web的控制器方法1
+     * 手動注入tcp與web的控制器方法1 for H2-database
      */
     @Bean(initMethod = "start", destroyMethod = "stop")
     public Server h2ServerTcp() throws SQLException {
@@ -45,7 +45,7 @@ public class StartMain extends javafx.application.Application {
 
     @Override
     public void init() throws Exception {
-        System.out.println("33333333333333333333333");
+        System.out.println("2222222222222222222222222");
         SpringApplicationBuilder builder = new SpringApplicationBuilder(StartMain.class);
         builder.application().setWebApplicationType(WebApplicationType.NONE);
         applicationContext = builder.run(getParameters().getRaw().toArray(new String[0]));
@@ -53,7 +53,7 @@ public class StartMain extends javafx.application.Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        System.out.println("2222222222222222222222222");
+        System.out.println("33333333333333333333333");
         GUIState.setStage(primaryStage);
         GUIState.setHostServices(this.getHostServices());
         showInitialView();

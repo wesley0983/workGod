@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="sample.controller.CompanyController" >
+    <children>
+        <VBox prefHeight="377.0" prefWidth="502.0">
+            <children>
+                <HBox spacing="10.0">
+                    <children>
+                        <Label text="新增廠商">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="textCompany" />
+                        <Button fx:id="addBtnCompany" mnemonicParsing="false" onAction="#addCompany" text="add" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="274.0" prefWidth="473.0">
+                    <children>
+                        <TableView fx:id="vendorReportView" prefHeight="274.0" prefWidth="463.0">
+                            <columns>
+                                <TableColumn fx:id="companyName" prefWidth="231.0" text="廠商" />
+                                <TableColumn fx:id="productName" minWidth="0.0" prefWidth="176.0" text="樣式" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#updateTable" text="Button" />
+                    </children>
+                </HBox>
+                <HBox spacing="10.0">
+                    <children>
+                        <Label text="新增樣式">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Label>
+                        <ComboBox fx:id="menuCompany" prefWidth="150.0" promptText="廠商選單" />
+                        <TextField fx:id="textProduct" />
+                        <Button fx:id="addBtnProduct" mnemonicParsing="false" onAction="#addProduct" text="addSize" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

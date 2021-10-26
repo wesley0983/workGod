@@ -8,16 +8,19 @@ import javax.persistence.Entity;
 @Entity
 public class MenuItem extends SimpleEntity {
 
-    @Column
+    @Column//-1為根，0為子
     private int parent;
 
     @Column
-    private String key;
+    private String usViewBeanName;
 
     @Column
-    private String value;
+    private String usControllerBeanName;
 
     @Column
+    private String barName;
+
+    @Column//1為展開、0反之
     private Boolean expanded;
 
     public int getParent() {
@@ -28,20 +31,28 @@ public class MenuItem extends SimpleEntity {
         this.parent = parent;
     }
 
-    public String getKey() {
-        return key;
+    public String getUsViewBeanName() {
+        return usViewBeanName;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setUsViewBeanName(String usViewBeanName) {
+        this.usViewBeanName = usViewBeanName;
     }
 
-    public String getValue() {
-        return value;
+    public String getUsControllerBeanName() {
+        return usControllerBeanName;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setUsControllerBeanName(String usControllerBeanName) {
+        this.usControllerBeanName = usControllerBeanName;
+    }
+
+    public String getBarName() {
+        return barName;
+    }
+
+    public void setBarName(String value) {
+        this.barName = value;
     }
 
     public Boolean getExpanded() {
@@ -54,6 +65,6 @@ public class MenuItem extends SimpleEntity {
 
     @Override
     public String toString() {
-        return this.value;
+        return this.barName;
     }
 }
