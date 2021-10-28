@@ -12,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.juli.logging.LogFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +59,8 @@ public class CompanyController implements PrototypeController {
     ObservableList<Owner> companyData = FXCollections.observableArrayList();
 
 
-    protected void initCompany(){
+    @Override
+    public void init() {
         //表格
         List<VendorReport> vendorReportList = companyService.init();
         vendorReportData.addAll(vendorReportList);
@@ -144,8 +144,11 @@ public class CompanyController implements PrototypeController {
         }
     }
 
-    @FXML
-    void updateTable(ActionEvent event) {
-        System.out.println(menuCompany.getValue());
-    }
+    //todo 未開發
+//    @FXML
+//    void updateTable(ActionEvent event) {
+//        System.out.println(menuCompany.getValue());
+//    }
+
+
 }

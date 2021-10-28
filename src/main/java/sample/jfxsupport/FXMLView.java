@@ -1,5 +1,6 @@
 package sample.jfxsupport;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Retention;

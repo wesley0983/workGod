@@ -6,12 +6,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import sample.controller.view.CompanyView;
+import sample.controller.view.BeanDistributor;
 import sample.entity.po.MenuItem;
+import sample.jfxsupport.AbstractFxmlView;
 import sample.jfxsupport.FXMLController;
+import sample.jfxsupport.PrototypeController;
 import sample.service.MenuItemService;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @FXMLController
@@ -39,6 +42,8 @@ public class MainController {
     @Autowired
     private MenuItemService menuItemService;
 
+    @Autowired
+    private BeanDistributor beanDistributor;
 
 
     TreeView<MenuItem> treeView;
@@ -99,16 +104,20 @@ public class MainController {
     }
 
     private void showItemContent(MenuItem menuItem) {
-        CompanyView gridView = context.getBean(CompanyView.class);
-        CompanyController controller = context.getBean(CompanyController.class);
-        gridView.setController(controller);
+        System.out.println("123");
+        Map<String, AbstractFxmlView> viewBean = beanDistributor.getViewBean(menuItem.getUsViewBeanName());
+        Map<String, PrototypeController> controllerBean = beanDistributor.getControllerBean(menuItem.getUsControllerBeanName());
+        AbstractFxmlView abstractFxmlView = viewBean.get(menuItem.getUsViewBeanName());
+        PrototypeController prototypeController = controllerBean.get(menuItem.getUsControllerBeanName());
+        abstractFxmlView.setController(prototypeController);
 
         Tab tab = new Tab(menuItem.getBarName() + ADDITIONAL_TAB_TITLE);
-        tab.setContent(gridView.getView());
+        tab.setContent(abstractFxmlView.getView());
+
         tabPane.getTabs().add(tab);
         tabPane.getSelectionModel().select(tabPane.getTabs().size() - 1);
 
-        controller.initCompany();
+        prototypeController.init();
     }
 
     private int findTabIndex(String title) {
